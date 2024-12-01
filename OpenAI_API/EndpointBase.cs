@@ -125,7 +125,7 @@ namespace OpenAI_API
 				}
 				else
 				{
-					string jsonContent = JsonConvert.SerializeObject(postData, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+					string jsonContent = JsonConvert.SerializeObject(postData, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore ,TypeNameHandling=TypeNameHandling.None});
 					var stringContent = new StringContent(jsonContent, UnicodeEncoding.UTF8, "application/json");
 					req.Content = stringContent;
 				}
