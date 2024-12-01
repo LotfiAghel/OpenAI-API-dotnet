@@ -131,7 +131,7 @@ namespace OpenAI_API.Audio
                 return await GetWithDetailsAsync(fileStream, Path.GetFileName(audioFilePath), language, prompt, temperature);
             }
         }
-        public async Task<string> GetWithDetailsAsync2(string fileAddress, string language = null, string prompt = null, string responseFormat = null, List<string> timestamps, double? temperature = null)
+        public async Task<string> GetWithDetailsAsync2(string fileAddress, string language = null, string prompt = null, string responseFormat = null, List<string> timestamps = null, double? temperature = null)
         {
             using (var fileStream = File.OpenRead(fileAddress))
             {
