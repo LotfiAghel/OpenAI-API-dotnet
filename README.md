@@ -4,6 +4,8 @@ Microsoft reached out to me about transitioning this library into a new official
 This github repo will remain here to document my original version of the library through [version 1.11, which is still available on Nuget as well](https://www.nuget.org/packages/OpenAI/1.11.0).
 🎉 
 
+
+
 # C#/.NET SDK for accessing the OpenAI APIs, including GPT-3.5/4, GPT-3.5/4-Turbo, and DALL-E 2/3
 
 A simple C# .NET wrapper library to use with OpenAI's API.  More context [on my blog](https://rogerpincombe.com/openai-dotnet-api).  **This is my original unofficial wrapper library around the OpenAI API.**
