@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Text;
 
 namespace OpenAI_API.Audio
@@ -12,9 +13,12 @@ namespace OpenAI_API.Audio
 		public double duration { get; set; }
 		public string language { get; set; }
 		public List<Segment> segments { get; set; }
+		public List<word> words { get; set; }
+
 		public string task { get; set; }
 		public string text { get; set; }
 
+		public class word { }
 		public class Segment
 		{
 			public double avg_logprob { get; set; }
