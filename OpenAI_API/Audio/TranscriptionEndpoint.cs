@@ -148,11 +148,11 @@ namespace OpenAI_API.Audio
                 {
                     fileStream.CopyTo(memoryStream);
                     content = new MultipartFormDataContent
-                {
-                    { new StringContent(request.Model), "model" },
-                    { new StringContent(request.ResponseFormat), "response_format" },
-                    { new ByteArrayContent(memoryStream.ToArray()), "file" }
-                };
+                    {
+                        { new StringContent(request.Model), "model" },
+                        { new StringContent(request.ResponseFormat), "response_format" },
+                        { new ByteArrayContent(memoryStream.ToArray()), "file" , Path.GetFileName(fileAddress) }
+                    };
                     string[] timestampGranularities = { "word", "segment" };
                     foreach (var granularity in timestampGranularities)
                     {
