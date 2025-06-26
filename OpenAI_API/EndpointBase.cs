@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -93,7 +93,47 @@ namespace OpenAI_API
 			return $"Error at {name} ({description}) with HTTP status code: {response.StatusCode}. Content: {resultAsString ?? "<no content>"}";
 		}
 
+		public static async Task<string> ToCurlCommand(HttpRequestMessage request)
+		{
+			var builder = new StringBuilder();
 
+			builder.Append("curl");
+
+			// Method
+			if (request.Method != HttpMethod.Get)
+				builder.Append($" -X {request.Method}");
+
+			// URL
+			builder.Append($" \"{request.RequestUri}\"");
+
+			// Headers
+			foreach (var header in request.Headers)
+			{
+				foreach (var value in header.Value)
+				{
+					builder.Append($" -H \"{header.Key}: {value}\"");
+				}
+			}
+
+			if (request.Content != null)
+			{
+				foreach (var header in request.Content.Headers)
+				{
+					foreach (var value in header.Value)
+					{
+						builder.Append($" -H \"{header.Key}: {value}\"");
+					}
+				}
+
+				var body = await request.Content.ReadAsStringAsync();
+				if (!string.IsNullOrWhiteSpace(body))
+				{
+					builder.Append($" -d '{body.Replace("'", "'\\''")}'");
+				}
+			}
+
+			return builder.ToString();
+		}
 		/// <summary>
 		/// Sends an HTTP request and returns the response.  Does not do any parsing, but does do error handling.
 		/// </summary>
@@ -216,7 +256,7 @@ namespace OpenAI_API
 		/// <exception cref="HttpRequestException">Throws an exception if a non-success HTTP response was returned or if the result couldn't be parsed.</exception>
 		private async Task<T> HttpRequest<T>(string url = null, HttpMethod verb = null, object postData = null) where T : ApiResultBase
 		{
-			var response = await HttpRequestRaw(url, verb, postData);
+			var response = await HttpRequestRaw(url, verb, postData,true);
 			string resultAsString = await response.Content.ReadAsStringAsync();
 
 			var res = JsonConvert.DeserializeObject<T>(resultAsString);
