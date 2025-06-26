@@ -256,6 +256,7 @@ namespace OpenAI_API
 		/// <exception cref="HttpRequestException">Throws an exception if a non-success HTTP response was returned or if the result couldn't be parsed.</exception>
 		private async Task<T> HttpRequest<T>(string url = null, HttpMethod verb = null, object postData = null) where T : ApiResultBase
 		{
+			
 			var response = await HttpRequestRaw(url, verb, postData,true);
 			string resultAsString = await response.Content.ReadAsStringAsync();
 
