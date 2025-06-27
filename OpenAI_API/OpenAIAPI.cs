@@ -21,7 +21,10 @@ namespace OpenAI_API
 		/// for Azure, should be "https://(your-resource-name.openai.azure.com/openai/deployments/(deployment-id)/{1}?api-version={0}"
 		/// </summary>
 		//public string ApiUrlFormat { get; set; } = "http://5.61.43.17/{0}/{1}";
-		public string ApiUrlFormat { get; set; } = "http://openai.testhelper.com/{0}/{1}";
+
+		public string ApiUrlFormat { get; set; } = "https://api.openai.com/{0}/{1}";
+		
+		//public string ApiUrlFormat { get; set; } = "http://openai.testhelper.com/{0}/{1}";
 		
 
 		/// <summary>
